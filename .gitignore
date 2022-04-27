@@ -1,0 +1,16 @@
+.DS_Store
+
+*.log
+
+.idea
+.project
+.settings
+.svn
+.env
+
+
+node_modules/
+
+/dist
+config.js
+yarn.lock

@@ -1,0 +1,101 @@
+{
+	"name": "fast-scripts",
+	"displayName": "fast-scripts",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.61.2"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onView:fast-command",
+		"onCommand:fast-scripts.helloWorld"
+	],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "package-explorer",
+					"title": "快速操作-PACKAGE",
+					"icon": "media/container.svg"
+				}
+			]
+		},
+		"commands":[
+			{
+				"command": "fast-command.refresh",
+				"title":"刷新",
+				"icon":{
+					"dark": "media/dark_refresh.svg",
+					"light": "media/light_refresh.svg"
+				}
+			},
+			{
+				"command": "fast-command.run",
+				"title":"运行",
+				"icon":{
+					"dark": "media/dark_run.svg",
+					"light": "media/light_run.svg"
+				}
+			}
+		],
+		"views": {
+			"package-explorer": [
+				{
+					"id": "fast-command",
+					"name": "包解析",
+					"icon": "media/scripts.svg"
+				}
+			]
+		},
+		"menus":{
+			"view/title":[
+				{
+					"command":"fast-command.refresh",
+					"when":"view == fast-command",
+					"group":"navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command":"fast-command.run",
+					"when":"view == fast-command && viewItem == run",
+					"group": "inline"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.66.0",
+		"@types/glob": "^7.2.0",
+		"@types/mocha": "^9.1.0",
+		"@types/node": "14.x",
+		"@typescript-eslint/eslint-plugin": "^5.16.0",
+		"@typescript-eslint/parser": "^5.16.0",
+		"eslint": "^8.11.0",
+		"glob": "^7.2.0",
+		"mocha": "^9.2.2",
+		"typescript": "^4.5.5",
+		"ts-loader": "^9.2.8",
+		"webpack": "^5.70.0",
+		"webpack-cli": "^4.9.2",
+		"@vscode/test-electron": "^2.1.3"
+	},
+	"dependencies": {
+		"yarn": "^1.22.18"
+	}
+}
